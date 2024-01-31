@@ -149,6 +149,18 @@ public class StudentInsertMenu extends JFrame {
 		insertBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		insertBtn.setBounds(418, 274, 192, 31);
 		contentPane.add(insertBtn);
+		
+		JButton closeBtn = new JButton("Close");
+		closeBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.getStudentInsertMenu().setVisible(false);
+				Main.getAdminStudentSearch().setEnabled(true);
+			}
+		});
+		closeBtn.setForeground(new Color(0, 0, 255));
+		closeBtn.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		closeBtn.setBounds(668, 281, 111, 23);
+		contentPane.add(closeBtn);
 	}
 	
 	private static String getSelectedGender(JRadioButton maleRadioButton, JRadioButton femaleRadioButton) {
