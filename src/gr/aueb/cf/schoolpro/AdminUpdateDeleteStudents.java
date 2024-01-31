@@ -26,6 +26,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -66,37 +68,42 @@ public class AdminUpdateDeleteStudents extends JFrame {
 						java.sql.Date sqlDate = rs.getDate("BIRTH_DATE");
 						birthTxt.setText(sqlDate.toString());
 					} 
-					if (!rs.next()) {
+					else if (!rs.next()) {
 						JOptionPane.showMessageDialog(null,  "No Students found", "Teachers", JOptionPane.WARNING_MESSAGE);
 						Main.getAdminStudentSearch().setEnabled(true);
 						Main.getAdminUpdateDeleteStudents().setVisible(false);
 					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();	
-				}
+				} 
 			
 					
-				
 //				String sqlCity = "SELECT * FROM CITIES";
-//				try (Connection connection = DBUtil.getConnection();
-//					PreparedStatement psCity = connection.prepareStatement(sqlCity);
-//					ResultSet rsCity = psCity.executeQuery()) {
-//					
-//					HashMap<Integer, String> cities = new HashMap<>();
-//					DefaultComboBoxModel<String> citiesModel = new DefaultComboBoxModel<>();
-//					
-//					while(rsCity.next()) {
-//						String city = rsCity.getString("CITY");
-//						int cityId = rsCity.getInt("ID");
-//						cities.put(cityId, city);
-//						citiesModel.addElement(city);
-//					}
-//					cityComboBox.setModel(citiesModel);
-//					
-//					
-//				} catch(SQLException e1) {
-//					e1.printStackTrace();
-//				}
+//				try {
+//				    PreparedStatement psCity = connection.prepareStatement(sqlCity);
+//				    ResultSet rsCity = psCity.executeQuery();
+//
+//				    HashMap<Integer, String> cities = new HashMap<>();
+//				    DefaultComboBoxModel<String> citiesModel = new DefaultComboBoxModel<>();
+//
+//				    // Iterate through all rows in the result set
+//				    while (rsCity.next()) {
+//				        String city = rsCity.getString("CITY");
+//				        int cityId = rsCity.getInt("ID");
+//
+//				        cities.put(cityId, city);
+//				        citiesModel.addElement(city);
+//				    }
+//
+//				    // Set the model after processing all rows
+//				    cityComboBox.setModel(citiesModel);
+//				    
+				
+	
+				
+					
+					
+					
 			}
 				
 		});
@@ -184,11 +191,70 @@ public class AdminUpdateDeleteStudents extends JFrame {
 		contentPane.add(btnNext);
 		
 		JButton btnUpdate = new JButton("Update");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String sql = "UPDATE STUDENTS SET FIRSTNAME = ? , LASTNAME = ?, GENDER = ?, BIRTH_DATE = ? WHERE ID = ?";
+				
+				try {
+					PreparedStatement ps = connection.prepareStatement(sql);
+					String firstname = firstnameTxt.getText().trim();
+					String lastname = lastnameTxt.getText().trim();
+					String gender = genderTxt.getText().trim().toUpperCase();
+					String currentBirthday = birthTxt.getText().trim();
+					String updatedBirthday = currentBirthday;
+					
+					currentBirthday.equals(updatedBirthday);
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					java.util.Date utilDate = dateFormat.parse(updatedBirthday);
+					java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+					ps.setString(1, firstname);
+					ps.setString(2, lastname);
+					ps.setString(3, gender);
+					ps.setDate(4, sqlDate);
+					ps.setString(5, idTxt.getText());
+					
+					int n = ps.executeUpdate();
+					
+					if (n > 0) {
+						JOptionPane.showMessageDialog(null, "Successful Update", "Update", JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(null, "Update Error", "Update", JOptionPane.ERROR_MESSAGE);
+					}
+					
+					
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnUpdate.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnUpdate.setBounds(211, 414, 88, 23);
 		contentPane.add(btnUpdate);
 		
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String sql = "DELETE FROM STUDENTS WHERE ID = ?";
+				
+				try {
+					PreparedStatement ps = connection.prepareStatement(sql);
+					ps.setString(1, idTxt.getText());
+					ps.setInt(1, Integer.parseInt(idTxt.getText()));
+					int response = JOptionPane.showConfirmDialog(null, "Are you sure?", "DELETE Warning", JOptionPane.YES_NO_OPTION);
+					if (response == JOptionPane.YES_OPTION) {
+						int n = ps.executeUpdate();
+						JOptionPane.showMessageDialog(null, n + " rows affected", "Delete", JOptionPane.INFORMATION_MESSAGE);
+					} else return;
+					
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnDelete.setBounds(310, 415, 89, 23);
 		contentPane.add(btnDelete);
@@ -215,7 +281,7 @@ public class AdminUpdateDeleteStudents extends JFrame {
 		contentPane.add(birthTxt);
 		birthTxt.setColumns(10);
 		
-		genderTxt = new JTextField();
+		genderTxt = new JTextField(1);
 		genderTxt.setBounds(119, 311, 34, 20);
 		contentPane.add(genderTxt);
 		genderTxt.setColumns(10);
