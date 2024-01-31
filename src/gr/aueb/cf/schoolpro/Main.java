@@ -6,16 +6,24 @@ import java.awt.EventQueue;
 public class Main {
 	private static Login loginForm;
 	private static AdminMenu adminMenu;
+	private static AdminUpdateDeleteStudents adminUpdateDeleteStudents;
+	private static AdminStudentSearch adminStudentSearch;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login loginForm = new Login();
+					loginForm = new Login();
 					loginForm.setVisible(true);
 					
-					AdminMenu adminMenu = new AdminMenu();
+					adminMenu = new AdminMenu();
 					adminMenu.setVisible(false);
+					
+					adminUpdateDeleteStudents = new AdminUpdateDeleteStudents();
+					adminUpdateDeleteStudents.setVisible(false);
+					
+					adminStudentSearch = new AdminStudentSearch();
+					adminStudentSearch.setVisible(false);
 				
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -25,17 +33,19 @@ public class Main {
 	}
 
 	public static Login getLoginForm() {
-		if (loginForm == null) {
-			loginForm = new Login();
-		}
 		return loginForm;
 	}
 
 	public static AdminMenu getAdminMenu() {
-		if (adminMenu == null) {
-			adminMenu = new AdminMenu();
-		}
 		return adminMenu;
+	}
+
+	public static AdminUpdateDeleteStudents getAdminUpdateDeleteStudents() {
+		return adminUpdateDeleteStudents;
+	}
+
+	public static AdminStudentSearch getAdminStudentSearch() {
+		return adminStudentSearch;
 	}
 	
 }

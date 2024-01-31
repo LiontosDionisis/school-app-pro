@@ -8,6 +8,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AdminMenu extends JFrame {
 
@@ -24,6 +26,12 @@ public class AdminMenu extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton studentsBtn = new JButton("");
+		studentsBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.getAdminStudentSearch().setVisible(true);
+				Main.getAdminMenu().setEnabled(false);
+			}
+		});
 		studentsBtn.setBounds(24, 41, 53, 34);
 		contentPane.add(studentsBtn);
 		
