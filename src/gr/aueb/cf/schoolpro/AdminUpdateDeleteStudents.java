@@ -1,10 +1,9 @@
 package gr.aueb.cf.schoolpro;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+
 
 import gr.aueb.cf.schoolpro.util.DBUtil;
 
@@ -13,7 +12,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 
-import javax.swing.AbstractButton;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -96,17 +95,12 @@ public class AdminUpdateDeleteStudents extends JFrame {
 //				    }
 //
 //				    // Set the model after processing all rows
-//				    cityComboBox.setModel(citiesModel);
-//				    
+//				    cityComboBox.setModel(citiesModel);		
+//				} catch (SQLException e1) {
+//				e1.printStackTrace();
+//			}
 				
-	
-				
-					
-					
-					
-			}
-				
-		});
+		}});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 510, 487);
 		contentPane = new JPanel();
@@ -148,7 +142,7 @@ public class AdminUpdateDeleteStudents extends JFrame {
 		JButton btnNewButton = new JButton("Prev");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String sql = "SELECT * FROM STUDENTS WHERE LASTNAME LIKE ?";
+//				String sql = "SELECT * FROM STUDENTS WHERE LASTNAME LIKE ?";
 				try {
 					if (rs.first()) {
 						idTxt.setText(rs.getString("ID"));
@@ -169,7 +163,7 @@ public class AdminUpdateDeleteStudents extends JFrame {
 		JButton btnNext = new JButton("Next");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String sql = "SELECT * FROM STUDENTS WHERE LASTNAME LIKE ?";
+//				String sql = "SELECT * FROM STUDENTS WHERE LASTNAME LIKE ?";
 				try {
 					
 					if (rs.next()) {

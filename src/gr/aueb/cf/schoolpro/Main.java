@@ -8,6 +8,7 @@ public class Main {
 	private static AdminMenu adminMenu;
 	private static AdminUpdateDeleteStudents adminUpdateDeleteStudents;
 	private static AdminStudentSearch adminStudentSearch;
+	private static StudentInsertMenu studentInsertMenu;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -24,6 +25,9 @@ public class Main {
 					
 					adminStudentSearch = new AdminStudentSearch();
 					adminStudentSearch.setVisible(false);
+					
+					studentInsertMenu = new StudentInsertMenu();
+					studentInsertMenu.setVisible(false);
 				
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,6 +50,10 @@ public class Main {
 
 	public static AdminStudentSearch getAdminStudentSearch() {
 		return adminStudentSearch;
+	}
+
+	public static StudentInsertMenu getStudentInsertMenu() {
+		return studentInsertMenu;
 	}
 	
 }

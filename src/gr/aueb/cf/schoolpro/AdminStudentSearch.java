@@ -34,7 +34,7 @@ public class AdminStudentSearch extends JFrame {
 			}
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 423, 357);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -43,11 +43,11 @@ public class AdminStudentSearch extends JFrame {
 		
 		JLabel lastnameLbl = new JLabel("Lastname");
 		lastnameLbl.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lastnameLbl.setBounds(153, 70, 87, 25);
+		lastnameLbl.setBounds(153, 27, 87, 25);
 		contentPane.add(lastnameLbl);
 		
 		lastnameTxt = new JTextField();
-		lastnameTxt.setBounds(102, 106, 203, 33);
+		lastnameTxt.setBounds(102, 63, 203, 33);
 		contentPane.add(lastnameTxt);
 		lastnameTxt.setColumns(10);
 		
@@ -61,16 +61,24 @@ public class AdminStudentSearch extends JFrame {
 		});
 		searchBtn.setForeground(new Color(0, 0, 255));
 		searchBtn.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		searchBtn.setBounds(153, 158, 109, 33);
+		searchBtn.setBounds(153, 115, 109, 33);
 		contentPane.add(searchBtn);
+		
+		JButton btnNewButton = new JButton("Insert Menu");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.getAdminStudentSearch().setEnabled(false);
+				Main.getStudentInsertMenu().setVisible(true);
+			}
+		});
+		btnNewButton.setForeground(new Color(255, 0, 0));
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton.setBounds(128, 192, 177, 43);
+		contentPane.add(btnNewButton);
 	}
 
 
 	public String getLastname() {
 		return lastname;
 	}
-
-
-	
-
 }
