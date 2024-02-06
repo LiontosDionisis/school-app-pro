@@ -77,28 +77,26 @@ public class AdminUpdateDeleteStudents extends JFrame {
 				} 
 			
 					
-//				String sqlCity = "SELECT * FROM CITIES";
-//				try {
-//				    PreparedStatement psCity = connection.prepareStatement(sqlCity);
-//				    ResultSet rsCity = psCity.executeQuery();
-//
-//				    HashMap<Integer, String> cities = new HashMap<>();
-//				    DefaultComboBoxModel<String> citiesModel = new DefaultComboBoxModel<>();
-//
-//				    // Iterate through all rows in the result set
-//				    while (rsCity.next()) {
-//				        String city = rsCity.getString("CITY");
-//				        int cityId = rsCity.getInt("ID");
-//
-//				        cities.put(cityId, city);
-//				        citiesModel.addElement(city);
-//				    }
-//
-//				    // Set the model after processing all rows
-//				    cityComboBox.setModel(citiesModel);		
-//				} catch (SQLException e1) {
-//				e1.printStackTrace();
-//			}
+				String sqlCity = "SELECT * FROM CITIES";
+				try {
+				    PreparedStatement psCity = connection.prepareStatement(sqlCity);
+				    ResultSet rsCity = psCity.executeQuery();
+
+				    HashMap<Integer, String> cities = new HashMap<>();
+				    DefaultComboBoxModel<String> citiesModel = new DefaultComboBoxModel<>();
+
+				    while (rsCity.next()) {
+				        String city = rsCity.getString("CITY");
+				        int cityId = rsCity.getInt("ID");
+
+				        cities.put(cityId, city);
+				        citiesModel.addElement(city);
+				    }
+
+				    cityComboBox.setModel(citiesModel);		
+				} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 				
 		}});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

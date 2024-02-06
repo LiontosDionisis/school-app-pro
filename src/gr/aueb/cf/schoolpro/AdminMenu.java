@@ -36,6 +36,12 @@ public class AdminMenu extends JFrame {
 		contentPane.add(studentsBtn);
 		
 		JButton btnNewButton_1 = new JButton("");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Main.getAdminUserSearch().setVisible(true);
+				Main.getAdminMenu().setEnabled(false);
+			}
+		});
 		btnNewButton_1.setBounds(24, 116, 53, 34);
 		contentPane.add(btnNewButton_1);
 		
@@ -60,7 +66,7 @@ public class AdminMenu extends JFrame {
 		studentsLbl.setBounds(111, 41, 83, 14);
 		contentPane.add(studentsLbl);
 		
-		JLabel lblTeachers = new JLabel("Teachers");
+		JLabel lblTeachers = new JLabel("Users");
 		lblTeachers.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblTeachers.setBounds(111, 116, 94, 14);
 		contentPane.add(lblTeachers);

@@ -25,6 +25,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class StudentInsertMenu extends JFrame {
 
@@ -35,10 +37,17 @@ public class StudentInsertMenu extends JFrame {
 	private JTextField birthTxt;
 
 
-	/**
-	 * Create the frame.
-	 */
 	public StudentInsertMenu() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				firstnameTxt.setText("");
+				lastnameTxt.setText("");
+				birthTxt.setText("");
+				
+				
+			}
+		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 805, 355);
 		contentPane = new JPanel();
